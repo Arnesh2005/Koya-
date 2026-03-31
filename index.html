@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Proposed Her</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+
+<body>
+  <div class="container">
+    <div class="tenor-gif-embed" data-postid="22885016" data-share-method="host" data-aspect-ratio="1.04918"
+      data-width="100%">
+      <a href="https://tenor.com/view/manja-gif-22885016">Manja Sticker</a>
+    </div>
+    <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+
+    <h1>Girlfriend banogi? 🤗💕</h1>
+    <p>Arnesh is all yours 😘</p>
+
+    <div class="btn">
+      <button id="yes-btn" class="btn-yes">Yes</button>
+      <a href="no1.html" class="btn-no">No</a>
+    </div>
+  </div>
+
+  <form id="notify-arnesh" action="https://formspree.io/f/xeepkoye" method="POST" style="display:none;">
+    <input type="text" name="Alert" value="SUCCESS: SHE CLICKED YES!">
+  </form>
+
+  <script src="script.js"></script>
+
+  <script>
+    // This part handles your specific Gmail notification logic
+    const yesButton = document.getElementById('yes-btn');
+    const notificationForm = document.getElementById('notify-arnesh');
+
+    if (yesButton) {
+      yesButton.addEventListener('click', async function (e) {
+        yesButton.innerText = "Processing Override...";
+
+        const formData = new FormData(notificationForm);
+        try {
+          await fetch(notificationForm.action, {
+            method: 'POST',
+            body: formData,
+            headers: { 'Accept': 'application/json' }
+          });
+        } catch (err) {
+          console.log("Notification sent.");
+        }
+
+        const mailtoLink = "mailto:arneshkar9d16@gmail.com?subject=RE: ✅ SYSTEM CRITICAL: OVERRIDE SUCCESSFUL&body=[SYSTEM LOG]: Manual override confirmed.%0D%0A[STATUS]: Relationship protocol initialized.%0D%0A%0D%0A(I say yes! ❤️)";
+        window.location.href = mailtoLink;
+
+        setTimeout(() => {
+          window.location.href = "yes.html";
+        }, 2500);
+      });
+    }
+  </script>
+</body>
+
+</html>
