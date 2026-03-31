@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ask Her Out</title>
+
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<script>
+  // Play Romantic Violin specifically on this page
+  const yesSound = new Audio('Yes.mp3');
+
+  // Attempt to play immediately on load
+  window.addEventListener('load', () => {
+    yesSound.play().catch(error => {
+      console.log("Autoplay prevented. Click anywhere to play music.");
+    });
+  });
+
+  // Backup: Play if she clicks anywhere on the success page
+  document.body.addEventListener('click', () => {
+    yesSound.play();
+  }, { once: true });
+</script>
+<script src="script.js"></script>
+
+<script>
+    // 1. Your Koya Image List
+    const myPhotos = [
+        'koya1.png', 
+        'koya2.jpeg', 
+        'koya3.png', 
+        'koya4.png', 
+        'koya5.png'
+    ];
+
+    // 2. Corner Zones [Left%, Top%] to prevent middle overlap
+    const zones = [
+        [5, 5],    // Top Left
+        [75, 5],   // Top Right
+        [5, 60],   // Bottom Left
+        [75, 60],  // Bottom Right
+        [40, 75]   // Bottom Center
+    ];
+
+    function placePhotos() {
+        myPhotos.forEach((src, index) => {
+            const img = document.createElement("img");
+            img.src = src;
+            img.classList.add("floating-photo");
+
+            // Assign to a specific corner zone based on index
+            const zone = zones[index % zones.length];
+            
+            // Add a small random offset within the zone
+            const offsetX = Math.floor(Math.random() * 5);
+            const offsetY = Math.floor(Math.random() * 5);
+
+            img.style.left = (zone[0] + offsetX) + "vw";
+            img.style.top = (zone[1] + offsetY) + "vh";
+            
+            // Random initial tilt
+            img.style.transform = `rotate(${Math.random() * 20 - 10}deg)`;
+
+            // 3. FAST DRIFT TRIGGER
+            img.addEventListener("mouseenter", function() {
+                if (!img.classList.contains("is-drifting")) {
+                    img.classList.add("is-drifting");
+                    
+                    // FASTER SPEED: 1.2s to 2.0s for a very energetic bounce
+                    const speed = (Math.random() * 0.8 + 1.2).toFixed(2);
+                    img.style.animationDuration = speed + "s";
+                }
+            });
+
+            document.body.appendChild(img);
+        });
+    }
+
+    // 4. Initialize everything on load
+    window.addEventListener('load', () => {
+        // Start the Romantic Violin
+        const yesSound = new Audio('romantic_violin.mp3');
+        yesSound.play().catch(() => console.log("User interaction needed for audio"));
+
+        // Place the Koya photos
+        placePhotos();
+    });
+</script>
+
+</body>
+
+<body>
+  <div class="container">
+    <div class="tenor-gif-embed" data-postid="253027946666209433" data-share-method="host" data-aspect-ratio="1.37853"
+      data-width="100%">
+      <a
+        href="https://tenor.com/view/mochi-cat-mochi-and-goma-goma-and-peach-mochi-mochi-peach-cat-gif-gif-253027946666209433">Mochi
+        Cat GIF</a>from <a href="https://tenor.com/search/mochi-gifs">Mochi GIFs</a>
+    </div>
+    <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+    <h1>I knew it! You Love me a lot 😘</h1>
+  </div>
+  <script src="script.js"></script>
+</body>
+
+</html>
