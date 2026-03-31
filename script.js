@@ -5,8 +5,8 @@ document.addEventListener('click', async function (e) {
         e.preventDefault(); // Stop instant navigation
 
         const yesBtn = e.target;
-        yesBtn.innerText = "Arnesh got notified....hehe ";
-
+        yesBtn.innerText = "Arnesh got notified....hehe";
+        
         // Send Formspree Notification
         const notificationForm = document.getElementById('notify-arnesh');
         if (notificationForm) {
