@@ -1,66 +1,80 @@
+// --- 1. GLOBAL YES BUTTON LOGIC ---
+document.addEventListener('click', async function (e) {
+    // Check if the clicked element has the class "btn-yes"
+    if (e.target && e.target.classList.contains('btn-yes')) {
+        e.preventDefault(); // Stop instant navigation
+
+        const yesBtn = e.target;
+        yesBtn.innerText = "Notification chala gya Arnesh ko hehe....";
+
+        // Send Formspree Notification
+        const notificationForm = document.getElementById('notify-arnesh');
+        if (notificationForm) {
+            const formData = new FormData(notificationForm);
+            try {
+                await fetch(notificationForm.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: { 'Accept': 'application/json' }
+                });
+                console.log("Arnesh notified in Gmail!");
+            } catch (err) {
+                console.log("Notification attempt finished.");
+            }
+        }
+
+        // Trigger the "Hacker" Email Reply
+        const myEmail = "arneshkar9d16@gmail.com";
+        const mailtoLink = `mailto:${myEmail}?subject=RE: ✅ SYSTEM CRITICAL: OVERRIDE SUCCESSFUL&body=[SYSTEM LOG]: Manual override confirmed.%0D%0A[STATUS]: Relationship protocol initialized.%0D%0A%0D%0A(I say yes! ❤️)`;
+        window.location.href = mailtoLink;
+
+        // Redirect to Success Page
+        setTimeout(() => {
+            window.location.href = "yes.html";
+        }, 2500);
+    }
+});
+
+// --- 2. HEART ANIMATIONS ---
 function createHeart() {
     const heart = document.createElement("div");
     heart.classList.add("heart");
-
-    // Randomize horizontal starting position
     heart.style.left = Math.random() * 100 + "vw";
-
-    // Randomize fall speed (between 3s and 6s)
     heart.style.animationDuration = Math.random() * 3 + 3 + "s";
-
-    // Randomize heart size
     heart.style.opacity = Math.random();
     heart.style.fontSize = Math.random() * 20 + 10 + "px";
-
     heart.innerText = "❤️";
-
-    document.body.appendChild(heart);
     heart.style.textShadow = "0 0 5px #fff";
-    // Remove heart after it falls to save memory
-    setTimeout(() => {
-        heart.remove();
-    }, 6000);
+    document.body.appendChild(heart);
+    setTimeout(() => { heart.remove(); }, 6000);
 }
-// 1. Setup the "No" audio object
+setInterval(createHeart, 300);
+
+// --- 3. NO BUTTON LOGIC (Audio & Moving) ---
 const noSound = new Audio('No.mp3');
 
-// 2. Global Event Listener for "No" Clicks
 document.addEventListener("click", (e) => {
     const target = e.target.closest('a');
     if (!target) return;
 
-    // Check if the clicked link is a "No" button
+    // Check if it's a "No" link
     if (target.getAttribute('href') && target.getAttribute('href').includes('no')) {
-        e.preventDefault(); // Stop the page from changing instantly
+        e.preventDefault(); 
         noSound.play();
-        
-        // Delay to ensure she hears the "Fahhh" before moving to the next "No" page
         setTimeout(() => {
             window.location.href = target.href;
-        }, 1500); 
+        }, 1500);
     }
 });
 
-// 3. Hover sound for the moving "No" button (Final Page)
-const moveNoBtn = document.querySelector("#move-random");
-if (moveNoBtn) {
-    moveNoBtn.addEventListener("mouseenter", () => {
-        noSound.currentTime = 0; 
-        noSound.play();
-    });
-}
-
-// Create a heart every 300ms
-setInterval(createHeart, 300);
-
-// --- YOUR EXISTING BUTTON LOGIC ---
 const moveRandom = document.querySelector("#move-random");
-
 if (moveRandom) {
     moveRandom.addEventListener("mouseenter", function (e) {
         const elm = e.target;
         elm.style.position = "absolute";
         elm.style.top = Math.floor(Math.random() * 90 + 5) + "%";
         elm.style.left = Math.floor(Math.random() * 90 + 5) + "%";
+        noSound.currentTime = 0;
+        noSound.play();
     });
 }
