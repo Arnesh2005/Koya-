@@ -5,7 +5,7 @@ document.addEventListener('click', async function (e) {
         e.preventDefault(); // Stop instant navigation
 
         const yesBtn = e.target;
-        yesBtn.innerText = "Notification chala gya Arnesh ko hehe....";
+        yesBtn.innerText = "Arnesh got notified....hehe ";
 
         // Send Formspree Notification
         const notificationForm = document.getElementById('notify-arnesh');
@@ -25,7 +25,7 @@ document.addEventListener('click', async function (e) {
 
         // Trigger the "Hacker" Email Reply
         const myEmail = "arneshkar9d16@gmail.com";
-        const mailtoLink = `mailto:${myEmail}?subject=RE: ✅ SYSTEM CRITICAL: OVERRIDE SUCCESSFUL&body=[SYSTEM LOG]: Manual override confirmed.%0D%0A[STATUS]: Relationship protocol initialized.%0D%0A%0D%0A(I say yes! ❤️)`;
+        const mailtoLink = `mailto:arneshkar9d16@gmail.com?subject=RE: ✅ SYSTEM CRITICAL: OVERRIDE SUCCESSFUL&body=[SYSTEM LOG]: Manual override confirmed.%0D%0A[STATUS]: Relationship protocol initialized.%0D%0A%0D%0A(I say yes! ❤️)`;
         window.location.href = mailtoLink;
 
         // Redirect to Success Page
